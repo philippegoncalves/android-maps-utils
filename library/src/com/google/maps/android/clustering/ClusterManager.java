@@ -136,6 +136,15 @@ public class ClusterManager<T extends ClusterItem> implements GoogleMap.OnCamera
         }
     }
 
+    public Collection<T> getItems() {
+        mAlgorithmLock.writeLock().lock();
+        try {
+            return mAlgorithm.getItems();
+        } finally {
+            mAlgorithmLock.writeLock().unlock();
+        }
+    }
+
     /**
      * Force a re-cluster. You may want to call this after adding new item(s).
      */
